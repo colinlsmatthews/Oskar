@@ -1,5 +1,7 @@
 ﻿using Rhino;
+using Rhino.UI;
 using System;
+using System.Collections.Generic;
 
 namespace Oskar
 {
@@ -24,5 +26,22 @@ namespace Oskar
         // You can override methods here to change the plug-in behavior on
         // loading and shut down, add options pages to the Rhino _Option command
         // and maintain plug-in wide options in a document.
+        //protected override void DocumentPropertiesDialogPages(RhinoDoc doc, List<OptionsDialogPage> pages)
+        //{
+        //    var page = new Views.SampleCsEtoOptionsPage();
+        //    pages.Add(page);
+        //}
+
+        //protected override void OptionsDialogPages(List<OptionsDialogPage> pages)
+        //{
+        //    var page = new Views.SampleCsEtoOptionsPage();
+        //    pages.Add(page);
+        //}
+
+        //protected override void ObjectPropertiesPages(ObjectPropertiesPageCollection collection)
+        //{
+        //    var page = new Views.SampleCsEtoPropertiesPage();
+        //    collection.Add(page);
+        //}
     }
 }

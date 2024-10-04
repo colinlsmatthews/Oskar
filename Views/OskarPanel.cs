@@ -21,11 +21,20 @@ namespace Oskar.Views
 
             Title = GetType().Name;
 
-            var oskar_button = new Button { Text = "See Oskar", Image =  new Bitmap("../Resources/OskarIcon.png")};
+            var oskar_button = new Button { Text = "See Oskar", Image =  new Bitmap("C:\\Users\\Colin.Matthews\\source\\repos\\Oskar\\Resources\\OskarIcon.png") };
             oskar_button.Click += (sender, e) => OnOskarButton();
 
-            var other_button = new Button { Text = "Some other thing", TextColor = Eto.Drawing.Color.FromRgb(255) };
+            var other_button = new Button { Text = "Some other thing", TextColor = Eto.Drawing.Color.FromRgb(0xFF0000) };
             other_button.Click += (sender, e) => OnOtherButton();
+
+            var document_sn_label = new Label { Text = $"Document serial number: {documentSerialNumber}" };
+
+            var layout = new DynamicLayout { DefaultSpacing = new Size(20, 20), Padding = new Padding(10) };
+            layout.AddSeparateRow(oskar_button, null);
+            layout.AddSeparateRow(other_button, null);
+            layout.AddSeparateRow(document_sn_label, null);
+            layout.Add(null);
+            Content = layout;
         }
 
         public void OnOskarButton()
@@ -33,26 +42,32 @@ namespace Oskar.Views
             var dialog = new Catlet();
             dialog.ShowModal(this);
         }
-
-        #region IPanel methods
         protected void OnOtherButton()
         {
             Dialogs.ShowMessage("Some other thing here.", Title);
         }
 
+        #region IPanel methods
         public void PanelShown(uint documentSerialNumber, ShowPanelReason reason)
         {
-            throw new NotImplementedException();
+            // Called when the panel tab is made visible, in Mac Rhino this will happen
+            // for a document panel when a new document becomes active, the previous
+            // documents panel will get hidden and the new current panel will get shown.
+            Rhino.RhinoApp.WriteLine($"Panel shown for document {documentSerialNumber}, this serial number {m_document_sn} should be the same");
         }
 
         public void PanelHidden(uint documentSerialNumber, ShowPanelReason reason)
         {
-            throw new NotImplementedException();
+            // Called when the panel tab is hidden, in Mac Rhino this will happen
+            // for a document panel when a new document becomes active, the previous
+            // documents panel will get hidden and the new current panel will get shown.
+            Rhino.RhinoApp.WriteLine($"Panel hidden for document {documentSerialNumber}, this serial number {m_document_sn} should be the same");
         }
 
         public void PanelClosing(uint documentSerialNumber, bool onCloseDocument)
         {
-            throw new NotImplementedException();
+            // Called when the document or panel container is closed/destroyed
+            Rhino.RhinoApp.WriteLine($"Panel closing for document {documentSerialNumber}, this serial number {m_document_sn} should be the same");
         }
         #endregion IPanel methods
     }

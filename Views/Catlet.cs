@@ -18,7 +18,7 @@ namespace SampleCsEto.Views
                 Items =
                 {
                     new Label { Text = "This is Oskar." },
-                    new ImageView { Image = new Bitmap("../Resources/OskarIcon.png"), ToolTip = "Oskar" }
+                    new ImageView { Image = new Bitmap("C:\\Users\\Colin.Matthews\\source\\repos\\Oskar\\Resources\\OskarIcon.png"), ToolTip = "Oskar" }
                 }
             };
         }
