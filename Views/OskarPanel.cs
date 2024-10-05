@@ -10,23 +10,24 @@ namespace Oskar.Views
     public class OskarPanel : Panel, IPanel
     {
         readonly uint m_document_sn = 0;
-
+        private readonly IStyleManager _styleManager;
         public static System.Guid PanelId => typeof(OskarPanel).GUID;
-
         public string Title { get; }
 
         public OskarPanel(uint documentSerialNumber)
         {
             m_document_sn = documentSerialNumber;
+            _styleManager = OskarPlugin.Instance.GetStyleManager();
 
             Title = GetType().Name;
 
-            var oskar_button = new Button { Text = "See Oskar", Image =  new Bitmap("C:\\Users\\Colin.Matthews\\source\\repos\\Oskar\\Resources\\OskarIcon.png") };
+            var oskar_button = new Button { Text = "See Oskar",
+                                            TextColor = _styleManager.SecondaryTextColor,
+                                            Image =  new Bitmap("C:\\Users\\Colin.Matthews\\source\\repos\\Oskar\\Resources\\OskarIcon.png") };
             oskar_button.Click += (sender, e) => OnOskarButton();
 
-            var textColor = new ColorHSL(0, 1.0f, 1.0f, 1.0f);
 
-            var other_button = new Button { Text = "Some other thing", TextColor = textColor };
+            var other_button = new Button { Text = "Some other thing", TextColor = _styleManager.PrimaryTextColor };
             other_button.Click += (sender, e) => OnOtherButton();
 
             var document_sn_label = new Label { Text = $"Document serial number: {documentSerialNumber}" };

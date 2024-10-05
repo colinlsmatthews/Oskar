@@ -13,8 +13,8 @@ namespace Oskar.Views
         public Color PrimaryColor => Colors.Navy;
         public Color SecondaryColor => Colors.DarkSlateGray;
         public Color TertiaryColor() => Colors.LightBlue;
-        public Color PrimaryTextColor => Colors.AntiqueWhite;
-        public Color SecondaryTextColor => Colors.LightGrey;
+        public Color PrimaryTextColor => Colors.Magenta;
+        public Color SecondaryTextColor => Colors.Cyan;
         public Font PrimaryFont() => new Font(SystemFont.Default, 12);
         public Font SecondaryFont() => new Font(SystemFont.Bold, 12);
         public void ApplyButtonStyle(Button button)

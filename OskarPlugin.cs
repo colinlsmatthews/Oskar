@@ -24,6 +24,10 @@ namespace Oskar
         public OskarPlugin()
         {
             Instance = this;
+
+            // Initialize DI container with the desired theme
+            bool isDarkMode = GetUserThemePreference(); // Could also fetch dynamically
+            ConfigureServices(isDarkMode);
         }
 
         // Set up dependency injection
@@ -57,29 +61,35 @@ namespace Oskar
             return true; // Assume dark mode preference by default
         }
 
-
-
-
-
         // You can override methods here to change the plug-in behavior on
         // loading and shut down, add options pages to the Rhino _Option command
         // and maintain plug-in wide options in a document.
-        //protected override void DocumentPropertiesDialogPages(RhinoDoc doc, List<OptionsDialogPage> pages)
-        //{
-        //    var page = new Views.SampleCsEtoOptionsPage();
-        //    pages.Add(page);
-        //}
 
-        //protected override void OptionsDialogPages(List<OptionsDialogPage> pages)
-        //{
-        //    var page = new Views.SampleCsEtoOptionsPage();
-        //    pages.Add(page);
-        //}
+        // Dispose the DI container when the plugin shuts down
+        protected override void OnShutdown()
+        {
+            _serviceProvider.Dispose();
+            base.OnShutdown();
+        }
 
-        //protected override void ObjectPropertiesPages(ObjectPropertiesPageCollection collection)
-        //{
-        //    var page = new Views.SampleCsEtoPropertiesPage();
-        //    collection.Add(page);
-        //}
+
+        // TODO: figure out why options and properties pages aren't loading
+        protected override void DocumentPropertiesDialogPages(RhinoDoc doc, List<OptionsDialogPage> pages)
+        {
+            var page = new Views.OskarOptionsPage();
+            pages.Add(page);
+        }
+
+        protected override void OptionsDialogPages(List<OptionsDialogPage> pages)
+        {
+            var page = new Views.OskarOptionsPage();
+            pages.Add(page);
+        }
+
+        protected override void ObjectPropertiesPages(ObjectPropertiesPageCollection collection)
+        {
+            var page = new Views.OskarPropertiesPage();
+            collection.Add(page);
+        }
     }
 }

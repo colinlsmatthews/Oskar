@@ -69,15 +69,5 @@ namespace Oskar.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] OskarIconPng {
-            get {
-                object obj = ResourceManager.GetObject("OskarIconPng", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
