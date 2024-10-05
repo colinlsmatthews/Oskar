@@ -12,11 +12,11 @@ namespace Oskar.Views
     {
         Color PrimaryColor { get; }
         Color SecondaryColor { get; }
-        Color TertiaryColor { get; }
+        //Color TertiaryColor { get; }
         Color PrimaryTextColor { get; }
         Color SecondaryTextColor { get; }
-        Font PrimaryFont { get; }
-        Font SecondaryFont { get; }
+        //Font PrimaryFont { get; }
+        //Font SecondaryFont { get; }
         void ApplyButtonStyle(Button button);
     }
 }

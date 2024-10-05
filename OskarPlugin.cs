@@ -1,4 +1,6 @@
-﻿using Rhino;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Oskar.Views;
+using Rhino;
 using Rhino.UI;
 using System;
 using System.Collections.Generic;
@@ -15,13 +17,49 @@ namespace Oskar
     ///</summary>
     public class OskarPlugin : Rhino.PlugIns.PlugIn
     {
+        public static OskarPlugin Instance { get; private set; }
+
+        private ServiceProvider _serviceProvider;        
+        
         public OskarPlugin()
         {
             Instance = this;
         }
 
-        ///<summary>Gets the only instance of the OskarPlugin plug-in.</summary>
-        public static OskarPlugin Instance { get; private set; }
+        // Set up dependency injection
+        private void ConfigureServices(bool isDarkMode)
+        {
+            var services = new ServiceCollection();
+
+            // Register the appropriate style manager based on the theme
+            if (isDarkMode)
+            {
+                services.AddSingleton<IStyleManager, StyleManagerDark>();
+            }
+            else
+            {
+                services.AddSingleton<IStyleManager, StyleManagerLight>();
+            }
+
+            _serviceProvider = services.BuildServiceProvider();
+        }
+
+        // Method to get the IStyleManager instance
+        public IStyleManager GetStyleManager()
+        {
+            return _serviceProvider.GetService<IStyleManager>();
+        }
+
+        private bool GetUserThemePreference()
+        {
+            // Hardcoding preference for now, but could be used to
+            // fetch preference from settings, environment variables, etc.
+            return true; // Assume dark mode preference by default
+        }
+
+
+
+
 
         // You can override methods here to change the plug-in behavior on
         // loading and shut down, add options pages to the Rhino _Option command
