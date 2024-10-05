@@ -14,10 +14,10 @@ namespace SampleCsEto.Views
             Content = new StackLayout()
             {
                 Padding = new Padding(0),
-                Spacing = 6,
+                Spacing = 8,
                 Items =
                 {
-                    new Label { Text = "This is Oskar." },
+                    new Label { Text = "This is Oskar!" },
                     new ImageView { Image = new Bitmap("C:\\Users\\Colin.Matthews\\source\\repos\\Oskar\\Resources\\OskarIcon.png"), ToolTip = "Oskar" }
                 }
             };

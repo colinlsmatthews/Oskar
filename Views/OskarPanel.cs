@@ -24,7 +24,9 @@ namespace Oskar.Views
             var oskar_button = new Button { Text = "See Oskar", Image =  new Bitmap("C:\\Users\\Colin.Matthews\\source\\repos\\Oskar\\Resources\\OskarIcon.png") };
             oskar_button.Click += (sender, e) => OnOskarButton();
 
-            var other_button = new Button { Text = "Some other thing", TextColor = Eto.Drawing.Color.FromRgb(0xFF0000) };
+            var textColor = new ColorHSL(0, 1.0f, 1.0f, 1.0f);
+
+            var other_button = new Button { Text = "Some other thing", TextColor = textColor };
             other_button.Click += (sender, e) => OnOtherButton();
 
             var document_sn_label = new Label { Text = $"Document serial number: {documentSerialNumber}" };
